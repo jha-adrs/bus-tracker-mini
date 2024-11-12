@@ -15,6 +15,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { Progress } from "@/components/ui/progress"
 import { Star, Bus, Clock, Users, MapPin, Phone, BusFrontIcon, Fullscreen, RabbitIcon } from "lucide-react"
 import { stations, buses } from "@/lib/data"
+import { cn } from "@/lib/utils"
 
 export default function EnhancedSmartBusTracker() {
     const [selectedStation, setSelectedStation] = useState<string | null>(null)
@@ -89,7 +90,10 @@ export default function EnhancedSmartBusTracker() {
                         }
                         {filteredBuses.map((bus) => (
                             <Card key={bus.id} className="overflow-hidden">
-                                <CardHeader className={`${bus.color} text-white`}>
+                                <CardHeader className={cn(
+                                    `text-background`,
+                                    `bg-foreground`
+                                )}>
                                     <CardTitle className="flex justify-between items-center">
                                         <span className="flex items-center">
                                             <Bus className="mr-2" />
@@ -124,7 +128,7 @@ export default function EnhancedSmartBusTracker() {
                                                 <div className="space-y-2">
                                                     {bus.route.map((stop, index) => (
                                                         <div key={index} className="flex items-center">
-                                                            <div className={`w-6 h-6 rounded-full ${stop.visited ? bus.color : 'bg-gray-300'} mr-2`} />
+                                                            <div className={`w-6 h-6 rounded-full ${stop.visited ? "bg-amber-500" : 'dark:bg-gray-700 bg-gray-300'} mr-2`} />
                                                             <div className="flex-grow">
                                                                 <p className={`font-medium ${stop.visited ? 'text-foreground' : 'text-gray-500'}`}>{stop.stop}</p>
                                                             </div>
